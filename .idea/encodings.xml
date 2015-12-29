@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/letion/controllers/LoginController.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/letion/user/User.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/letion/user/enums/UserRoleEnum.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index_secure.jsp" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" charset="windows-1251" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

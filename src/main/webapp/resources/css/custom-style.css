@@ -1,0 +1,60 @@
+.cartPopup{
+    position: absolute;
+    visibility: hidden;
+    background-color: #0088cc;
+}
+.cartLogo {
+    width: 30px;
+    height: 20px;
+    position: absolute;
+
+}
+.cartImgSmall{
+    height: 60px;
+}
+
+.navbar-nav em{
+    padding: 1px 5px 0 4px;
+    margin-left: 0;
+    position: absolute;
+    height: 20px;
+    line-height: 18px;
+    top: 6px;
+    left: 40px;
+    font-size: 14px;
+    color: #3b4952;
+    background: #fdda31;
+    border-radius: 8px;
+    cursor: pointer;
+    list-style: none;
+}
+#infoCustomer{
+    display: none;
+}
+label{
+    display: block;
+}
+
+.animate-show {
+    line-height: 20px;
+    opacity: 1;
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    transition: all linear 0.4s;
+}
+
+.animate-show.ng-hide {
+    line-height: 0;
+    opacity: 0;
+    padding: 0 10px;
+}
+
+.check-element {
+    padding: 10px;
+    border: 0px solid black;
+    background: white;
+}
