@@ -45,7 +45,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-3">
-            <sf:form method="POST" modelAttribute="product" action="/adminka/update">
+            <sf:form method="POST" modelAttribute="product" action="/admin/update">
                 <fieldset>
                     <table cellspacing="0">
                         <tr>

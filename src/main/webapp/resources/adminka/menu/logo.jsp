@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/adminka"><span>Adminka</span></a>
+            <a class="navbar-brand" href="/admin"><span>Adminka</span></a>
 
             <sec:authorize access="!isAuthenticated()">
                     <a href="/login">Login</a>
@@ -25,8 +25,6 @@
                     <li class="dropdown pull-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                             <li><a href="javascript:document.getElementById('logout').submit()" class="glyphicon glyphicon-log-out">Logout</a></li>
                         </ul>
                     </li>

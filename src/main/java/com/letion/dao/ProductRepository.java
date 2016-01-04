@@ -95,7 +95,7 @@ public class ProductRepository implements BaseDao {
 
     @Override
     public Map<String, Map> getSelects() throws ClassNotFoundException, SQLException {
-        Map<String, Map> result = new HashMap<String, Map>();
+        Map<String, Map> result = new HashMap<>();
         result.put("selectManufacturer", this.getManufacturers());
         result.put("selectType", this.getTypes());
         result.put("selectAvailability", this.getAvailability());
@@ -104,8 +104,7 @@ public class ProductRepository implements BaseDao {
     }
 
     public Map<Long, String> getSelectData(String queryParam) throws ClassNotFoundException, SQLException {
-        Session session = sessionFactory.getCurrentSession();
-        Map<String, Map> selectData = new HashMap<String, Map>();
+        Session session = sessionFactory.getCurrentSession();//
         session.beginTransaction();
         Query query = session.createQuery(queryParam);
         List<Object[]> list = (List<Object[]>) query.list();
@@ -118,31 +117,19 @@ public class ProductRepository implements BaseDao {
     }
 
     private Map<Long, String> getManufacturers() throws SQLException, ClassNotFoundException {
-        Map<Long, String> result = new HashMap<Long, String>();
-        result = this.getSelectData("select id, name from Manufacturer");
-        return result;
-
+        return this.getSelectData("select id, name from Manufacturer");
     }
 
     private Map<Long, String> getTypes() throws SQLException, ClassNotFoundException {
-        Map<Long, String> result = new HashMap<Long, String>();
-        result = this.getSelectData("select id, name, typeUrl from ProductType");
-        return result;
-
+        return this.getSelectData("select id, name, typeUrl from ProductType");
     }
 
     private Map<Long, String> getAvailability() throws SQLException, ClassNotFoundException {
-        Map<Long, String> result = new HashMap<Long, String>();
-        result = this.getSelectData("select id, availability  from Availability");
-        return result;
-
+        return this.getSelectData("select id, availability  from Availability");
     }
 
     private Map<Long, String> getBrandAuto() throws SQLException, ClassNotFoundException {
-        Map<Long, String> result = new HashMap<Long, String>();
-        result = this.getSelectData("select id, url from BrandAuto");
-        return result;
-
+        return this.getSelectData("select id, url from BrandAuto");
     }
 }
 

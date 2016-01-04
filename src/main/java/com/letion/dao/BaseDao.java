@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public interface BaseDao<T> {
+public interface BaseDao {
     public OrderList saveCart(OrderList product) throws ClassNotFoundException, SQLException;
 
     public Product getById(int id) throws ClassNotFoundException, SQLException;

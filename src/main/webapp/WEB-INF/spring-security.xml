@@ -9,12 +9,12 @@
     <http auto-config="true">
 
         <intercept-url pattern="/" access="permitAll"/>
-        <intercept-url pattern="/adminka" access="permitAll"/>
-        <intercept-url pattern="/adminka/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/admin" access="permitAll"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <csrf disabled="true"/>
         <form-login
                 login-page="/login"
-                default-target-url="/adminka/dashboard"
+                default-target-url="/admin/dashboard"
                 always-use-default-target="true"
                 authentication-failure-url="/login?error"
                 login-processing-url="/j_spring_security_check"

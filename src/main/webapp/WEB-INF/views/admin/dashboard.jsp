@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Adminka Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <link href="/resources/adminka/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/adminka/css/datepicker3.css" rel="stylesheet">

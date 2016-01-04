@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Adminka</title>
+    <title>Admin Show Product</title>
 
     <link href="/resources/adminka/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/adminka/css/datepicker3.css" rel="stylesheet">
@@ -76,7 +76,7 @@
             <c:forEach items="${products}" var="item">
                 <tr>
                     <td data-field="id" data-sortable="true">${item.id}</td>
-                    <td data-field="state" data-checkbox="true" ><a href='/adminka/product/<c:out value="${item.url}" />'>${item.name}</a></td>
+                    <td data-field="state" data-checkbox="true" ><a href='/admin/product/<c:out value="${item.url}" />'>${item.name}</a></td>
                     <td data-field="id" data-sortable="true">${item.price}</td>
                     <td data-field="name"  data-sortable="true">${item.manufacturer.name}</td>
                     <td data-field="price" data-sortable="true">${item.availability.availability}</td>

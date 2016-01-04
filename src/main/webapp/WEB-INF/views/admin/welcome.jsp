@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>WELCOME ADMINKA</title>
+    <title>WELCOME ADMIN PANEL</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="/resources/adminka/css/bootstrap.css" />" rel="stylesheet">
@@ -31,22 +31,20 @@
 <div class="container">
 
     <div class="jumbotron" style="margin-top: 20px;">
-        <h1>Devcolibri.com</h1>
-        <p class="lead">Devcolibri - это сервис предоставляющий всем желающим возможность обучаться программированию.</p>
+
         <sec:authorize access="!isAuthenticated()">
+            <h1>WELCOME</h1>
             <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Войти</a></p>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
+            <h3>You logged</h3>
+            <p><a  href="<c:url value="/admin/dashboard" />">Go to Admin Panel</a></p>
             <c:url value="/logout" var="logoutUrl" />
             <form id="logout" action="${logoutUrl}" method="post" >
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
             <a class="btn btn-lg btn-success" href="javascript:document.getElementById('logout').submit()">Logout</a>
         </sec:authorize>
-    </div>
-
-    <div class="footer">
-        <p>&copy; Devcolibri 2014</p>
     </div>
 
 </div>
