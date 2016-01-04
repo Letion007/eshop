@@ -1,11 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
---
--- Хост: 127.0.0.1
--- Время создания: Дек 29 2015 г., 23:13
--- Версия сервера: 5.5.25
--- Версия PHP: 5.3.13
+--  SQL Dump
+
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,16 +25,7 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `user` varchar(100) COLLATE cp1251_bin NOT NULL,
   `pass` varchar(50) COLLATE cp1251_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `admin_users`
---
-
-INSERT INTO `admin_users` (`id`, `user`, `pass`) VALUES
-(1, 'fara', '1234');
-
--- --------------------------------------------------------
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Структура таблицы `availability`
@@ -53,6 +38,112 @@ CREATE TABLE IF NOT EXISTS `availability` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
+-- Структура таблицы `brand_auto`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_auto` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name_brand_auto` varchar(50) COLLATE cp1251_bin DEFAULT NULL,
+  `url_brand_auto` varchar(50) COLLATE cp1251_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+--
+-- Структура таблицы `customer`
+--
+
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customer_id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+--
+-- Структура таблицы `manufacturer`
+--
+
+CREATE TABLE IF NOT EXISTS `manufacturer` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE cp1251_bin NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  AUTO_INCREMENT=32 ;
+
+--
+-- Структура таблицы `order_list`
+--
+
+CREATE TABLE IF NOT EXISTS `order_list` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `id_product` bigint(255) NOT NULL,
+  `price` int(255) NOT NULL,
+  `quantity` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+
+--
+-- Структура таблицы `product`
+--
+
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `type_id` bigint(10) NOT NULL,
+  `artical` varchar(50) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `price` int(255) NOT NULL,
+  `suitable_model` varchar(255) NOT NULL,
+  `main_brand_auto_id` bigint(10) NOT NULL,
+  `description` text NOT NULL,
+  `video` varchar(255) NOT NULL,
+  `manufacturer_id` bigint(10) NOT NULL,
+  `availability_id` bigint(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (type_id) REFERENCES product_type(id),
+  FOREIGN KEY (main_brand_auto_id) REFERENCES brand_auto(id),
+  FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
+  FOREIGN KEY (availability_id) REFERENCES availability(id)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6134 ;
+
+--
+-- Структура таблицы `product_img`
+--
+
+CREATE TABLE IF NOT EXISTS `product_img` (
+  `id_product` bigint(10) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+
+--
+-- Структура таблицы `product_type`
+--
+
+CREATE TABLE IF NOT EXISTS `product_type` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE cp1251_bin DEFAULT NULL,
+  `type_url` varchar(50) COLLATE cp1251_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15;
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+
+
+--
+-- Дамп данных таблицы `admin_users`
+--
+
+INSERT INTO `admin_users` (`id`, `user`, `pass`) VALUES
+(1, 'fara', '1234');
+
+-- --------------------------------------------------------
+
+
+--
 -- Дамп данных таблицы `availability`
 --
 
@@ -63,16 +154,6 @@ INSERT INTO `availability` (`id`, `availability`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `brand_auto`
---
-
-CREATE TABLE IF NOT EXISTS `brand_auto` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `name_brand_auto` varchar(50) COLLATE cp1251_bin DEFAULT NULL,
-  `url_brand_auto` varchar(50) COLLATE cp1251_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `brand_auto`
@@ -94,29 +175,10 @@ INSERT INTO `brand_auto` (`id`, `name_brand_auto`, `url_brand_auto`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `customer`
---
 
-CREATE TABLE IF NOT EXISTS `customer` (
-  `customer_id` bigint(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `telephone` varchar(255) NOT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `manufacturer`
---
-
-CREATE TABLE IF NOT EXISTS `manufacturer` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE cp1251_bin NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin AUTO_INCREMENT=32 ;
 
 --
 -- Дамп данных таблицы `manufacturer`
@@ -143,110 +205,10 @@ INSERT INTO `manufacturer` (`id`, `name`) VALUES
 (18, 'Тайвань'),
 (19, 'Россия'),
 (20, 'СИАЗ (г.Рязань)'),
-(21, 'Автосвет (Киржач)'),
-(22, 'Автосвет (Киржач)'),
-(23, 'Автосвет (Киржач)'),
-(24, 'ОСВАР'),
-(25, 'BOSCH'),
-(26, 'BOSCH'),
-(27, 'BOSCH'),
-(28, 'BOSCH'),
-(29, 'ОСВАР'),
-(30, 'ОСВАР'),
 (31, '"АЭА" (г.Сутиски)');
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `model_auto`
---
-
-CREATE TABLE IF NOT EXISTS `model_auto` (
-  `id_model` int(11) NOT NULL AUTO_INCREMENT,
-  `marka` varchar(100) COLLATE cp1251_bin NOT NULL,
-  `model` varchar(100) COLLATE cp1251_bin NOT NULL,
-  `url_model` varchar(50) COLLATE cp1251_bin NOT NULL,
-  `narod_model` varchar(100) COLLATE cp1251_bin NOT NULL,
-  `description` text COLLATE cp1251_bin NOT NULL,
-  `img_model` varchar(50) COLLATE cp1251_bin NOT NULL,
-  `stop` int(11) NOT NULL,
-  PRIMARY KEY (`id_model`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin AUTO_INCREMENT=57 ;
-
---
--- Дамп данных таблицы `model_auto`
---
-
-INSERT INTO `model_auto` (`id_model`, `marka`, `model`, `url_model`, `narod_model`, `description`, `img_model`, `stop`) VALUES
-(1, 'ВАЗ', 'ВАЗ 2101', 'vaz_2101', 'копейка', '', 'vaz_2101', 1),
-(2, 'ВАЗ', 'ВАЗ 21011', 'vaz_21011', 'одинадцатая', '', 'vaz_21011', 1),
-(3, 'ВАЗ', 'ВАЗ 2102', 'vaz_2102', 'двойка', '', 'vaz_2102', 1),
-(4, 'ГАЗ', 'ГАЗ  2410', 'gaz_2410', 'Волга 2410', '', 'gaz_2410', 1),
-(5, 'ВАЗ', 'ВАЗ 2103', 'vaz_2103', 'тройка', '', 'vaz_2103', 1),
-(6, 'ВАЗ', 'ВАЗ 2104', 'vaz_2104', 'четверка', '', 'vaz_2104', 1),
-(7, 'ВАЗ', 'ВАЗ 2105', 'vaz_2105', 'пятерка', '', 'vaz_2105', 1),
-(8, 'DAEWOO', 'Lanos', 'lanos', 'Ланос', '', 'lanos', 1),
-(9, 'DAEWOO', 'Sens', 'sens', 'Сэнс', '', '', 1),
-(10, 'ВАЗ', 'ВАЗ 2106', 'vaz_2106', 'шестерка', '', '', 1),
-(11, 'ВАЗ', 'ВАЗ 2107', 'vaz_2107', 'семерка', '', '', 1),
-(12, 'ВАЗ', 'ВАЗ 2108', 'vaz_2108', 'восьмерка', '', '', 1),
-(13, 'ВАЗ', 'ВАЗ 2109', 'vaz_2109', 'девятка', '', '', 1),
-(14, 'ВАЗ', 'ВАЗ 2110', 'vaz_2110', 'десятка', '', '', 1),
-(15, 'ВАЗ', 'ВАЗ 2111', 'vaz_2111', '', '', '', 1),
-(16, 'ВАЗ', 'ВАЗ 2112', 'vaz_2112', '', '', '', 1),
-(17, 'ВАЗ', 'ВАЗ 2113', 'vaz_2113', '', '', '', 1),
-(18, 'ВАЗ', 'ВАЗ 2114', 'vaz_2114', '', '', '', 1),
-(19, 'ВАЗ', 'ВАЗ 2115', 'vaz_2115', '', '', '', 1),
-(20, 'ВАЗ', 'ВАЗ 1117 Калина', 'vaz_1117', 'Калина  универсал', '', '', 1),
-(21, 'ВАЗ', 'ВАЗ 1118 Калина', 'vaz_1118', 'Калина седан', '', '', 1),
-(22, 'ВАЗ', 'ВАЗ 1119', 'vaz_1119', 'Калина хэтчбэк', '', '', 1),
-(23, 'ВАЗ', 'ВАЗ 2170 Приора', 'vaz_2170', '', '', '', 1),
-(24, 'ВАЗ', 'ВАЗ 2171', 'vaz_2171', 'Приора универсал', '', '', 1),
-(25, 'ВАЗ', 'ВАЗ 2172', 'vaz_2172', 'Приора хэтчбэк', '', '', 1),
-(26, 'ВАЗ', 'ВАЗ 2121 Нива', 'vaz_2121', '', '', '', 1),
-(27, 'ВАЗ', 'ВАЗ 21213', 'vaz_213', 'Тайга', '', '', 1),
-(28, 'ВАЗ', 'ВАЗ 2123', 'vaz_2123', 'Chevrolet Нива', '', '', 1),
-(29, 'ВАЗ', 'ВАЗ 2190 Гранта', 'vaz_2190', 'Granta', '', '', 1),
-(30, 'Москвич (АЗЛК)', 'Москвич 2140 АЗЛК', 'azlk_2140', '', '', '', 1),
-(31, 'Москвич (АЗЛК)', 'Москвич 2141', 'azlk_2141', '', '', '', 1),
-(32, 'Москвич (АЗЛК)', 'Москвич 412 ИЖ', 'azlk_412', '', '', '', 1),
-(33, 'Москвич (АЗЛК)', 'Москвич 2126 ОДА', 'azlk_oda', '', '', '', 1),
-(34, 'Москвич (АЗЛК)', 'Москвич 2141 Святогор', 'azlk_2141_svyat', '', '', '', 1),
-(35, 'Москвич (АЗЛК)', 'Москвич 2142 Князь Владимир', 'azlk_2142', '', '', '', 1),
-(36, 'ГАЗ', 'ГАЗ 21', 'gaz_21', 'Волга 21', '', '', 1),
-(37, 'ГАЗ', 'ГАЗ 2401', 'gaz_2410', 'Волга 2401', '', '', 1),
-(38, 'ГАЗ', 'ГАЗ  3102', 'gaz_3102', 'Волга 3102', '', '', 1),
-(39, 'ГАЗ', 'ГАЗ 31029', 'gaz_31029', 'Волга 31029', '', '', 1),
-(40, 'ГАЗ', 'ГАЗ 3110', 'gaz_3110', 'Волга 3110', '', '', 1),
-(41, 'ГАЗ', 'ГАЗ 31105', 'gaz_31102', 'Волга 31105', '', '', 1),
-(42, 'Таврия (ЗАЗ)', 'Таврия', 'tavria', '', '', '', 1),
-(43, 'Таврия (ЗАЗ)', 'Славута', 'slavuta', '', '', '', 1),
-(44, 'КАМАЗ', 'КАМАЗ', 'kamaz', '', '', '', 1),
-(45, 'МАЗ', 'МАЗ', 'maz', '', '', '', 1),
-(46, 'УАЗ', 'УАЗ 3151 "Хантер"', 'uaz_3151', '', '', '', 1),
-(47, 'ГАЗ', 'Газель 3302', 'gazel_3302', '', '', '', 1),
-(48, 'ЗиЛ', 'ЗИЛ', 'zil', '', '', '', 1),
-(50, 'ВАЗ', 'ВАЗ 2123  (в новом кузове)', 'vaz_2123_new', '"Нива-Шевроле"  (в новом кузове)', '', '', 1),
-(51, 'УАЗ', 'УАЗ 3163 "Патриот" ', 'uaz_3136_patriot', '', '', '', 1),
-(52, 'Трактора, спецтехника', 'Трактора, спецтехника', 'traktora_speztechnika', '', '', '', 1),
-(53, 'УАЗ', 'УАЗ 469', 'uaz_469', '', '', '', 1),
-(54, 'КАМАЗ', 'Ока', 'oka', '', '', '', 1),
-(55, 'КАМАЗ', 'КАМАЗ "Евро"', 'kamaz_euro', '', '', '', 1),
-(56, 'МАЗ', 'Супер МАЗ', 'super_maz', '', '', '', 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `order_list`
---
-
-CREATE TABLE IF NOT EXISTS `order_list` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
-  `id_product` bigint(255) NOT NULL,
-  `price` int(255) NOT NULL,
-  `quantity` int(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- Дамп данных таблицы `order_list`
@@ -282,29 +244,11 @@ INSERT INTO `order_list` (`id`, `id_product`, `price`, `quantity`) VALUES
 (31, 6051, 450, 1),
 (32, 6070, 200, 1),
 (33, 6093, 400, 3),
-(34, 6092, 400, 2);
+(34, 6092, 400, 2),
+(35, 6093, 400, 2);
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `product`
---
-
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` bigint(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL,
-  `type_id` bigint(10) NOT NULL,
-  `artical` varchar(50) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `price` int(255) NOT NULL,
-  `suitable_model` varchar(255) NOT NULL,
-  `main_brand_auto_id` bigint(10) NOT NULL,
-  `description` text NOT NULL,
-  `video` varchar(255) NOT NULL,
-  `manufacturer_id` bigint(10) NOT NULL,
-  `availability_id` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6134 ;
 
 --
 -- Дамп данных таблицы `product`
@@ -406,319 +350,11 @@ INSERT INTO `product` (`id`, `url`, `type_id`, `artical`, `product_name`, `price
 (6123, 'fonar-zadnij-uaz', 2, 'ФП 132 А-06 / ФП132-3716010-02', 'Фонарь задний на УАЗ', 40, 'УАЗ и модификации', 5, 'Задний фонарь на УАЗ  все модификации.\r\n\r\nПроизводитель - Россия\r\n\r\nВыполнен в сборе, корпус пластмассовый.\r\n\r\nКупить фонарь УАЗ можно у нас с доставкой по Украине.\r\n', '', 19, 1),
 (6124, 'fonar-zadnij-zaz-30-zaporogecz', 2, '', 'Фонарь задний на ЗАЗ 30 (Запорожец, ушастый)', 50, ' Запорожец', 8, 'Задний фонарь на  Запорожец (30-тый, ушастый) оригинал заводской.\r\n\r\nКорпус металлический\r\n\r\n\r\n', '', 19, 1),
 (6125, 'fonar-zadnij-vaz-2110-uglovoj-osvar-klushki', 2, '411.3776 (41.3776)', 'Фонарь задний на ВАЗ 2110 (угловой) ОСВАР ("клюшки")', 320, ' ВАЗ 2110', 1, 'Задний фонарь на ВАЗ 2110  от производителя ОСВАР. Народное название - "клюшка", по форме элемента заднего хода.\r\n\r\nОтдельно в продаже как угловая часть, так и площадка ("стопы").\r\n\r\nПроизводитель - "Освар" (Россия, г.Вязники)\r\n\r\nКачественный, оригинальный фонарь для Вашего автомобиля\r\n\r\nДоставка возможна по всей территории Украины', '', 2, 1),
-(6126, 'fonar-zadnij-vaz-2110-ploshadka-osvar', 2, '411.3776', 'Фонарь задний на ВАЗ 2110 (площадка) ОСВАР', 250, '    ', 1, 'Задний фонарь на ВАЗ 2110 (десятку) от завода "Освар". Это качественный фонарь для Вашего авто.\r\n\r\nКрепление стандартное, подходит на всей модификации ВАЗ 2110.\r\n\r\nУ нас выгодная цена, доставка возможна по всей территории Украины, через "Новую почту"', '', 2, 1),
-(6133, 'new product', 14, '1111', 'новый продукт', 1200, 'применение', 1, 'Описание  большое', '', 2, 1);
+(6126, 'fonar-zadnij-vaz-2110-ploshadka-osvar', 2, '411.3776', 'Фонарь задний на ВАЗ 2110 (площадка) ОСВАР', 250, '    ', 1, 'Задний фонарь на ВАЗ 2110 (десятку) от завода "Освар". Это качественный фонарь для Вашего авто.\r\n\r\nКрепление стандартное, подходит на всей модификации ВАЗ 2110.\r\n\r\nУ нас выгодная цена, доставка возможна по всей территории Украины, через "Новую почту"', '', 2, 1);
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `products_connection`
---
 
-CREATE TABLE IF NOT EXISTS `products_connection` (
-  `id_tovar_main` int(25) NOT NULL,
-  `id_tovar_dop` varchar(25) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `products_connection`
---
-
-INSERT INTO `products_connection` (`id_tovar_main`, `id_tovar_dop`) VALUES
-(6032, '6068'),
-(6033, '6051'),
-(6043, '6061'),
-(6043, '6052'),
-(6043, '6037'),
-(6043, '0'),
-(6044, '6063'),
-(6044, '6071'),
-(6044, '6034'),
-(6044, '6036'),
-(6064, '6063'),
-(6064, '6067'),
-(6064, '6039'),
-(6046, '6050'),
-(0, '6037'),
-(0, '6052'),
-(1, '6062'),
-(1, '6060'),
-(2, '6069'),
-(2, '6067'),
-(2, '6074'),
-(3, '6063'),
-(3, '6067'),
-(3, '6055'),
-(3, '6048'),
-(6034, '6044'),
-(6036, '6067'),
-(6036, '6035'),
-(6066, '6075'),
-(6066, '6032'),
-(6035, '6063'),
-(6035, '6067'),
-(6035, '6042'),
-(6037, '6067'),
-(6037, '6088'),
-(6037, '6052'),
-(6040, '6048'),
-(6040, '3'),
-(6040, '6067'),
-(6065, '6067'),
-(6065, '6064'),
-(6054, '6067'),
-(6054, '6074'),
-(6054, '6049'),
-(6041, '6067'),
-(6056, '6063'),
-(6058, '6057'),
-(6057, '6058'),
-(6038, '6064'),
-(6038, '6039'),
-(6038, '6067'),
-(6039, '6064'),
-(6039, '6038'),
-(6039, '6067'),
-(6048, '6055'),
-(6048, '3'),
-(6052, '6061'),
-(6052, '6043'),
-(6052, '6037'),
-(6049, '6054'),
-(6049, '2'),
-(6051, '6093'),
-(6060, '6072'),
-(6060, '1'),
-(6062, '6060'),
-(6062, '1'),
-(6061, '6069'),
-(6061, '6052'),
-(6063, '6069'),
-(6063, '6040'),
-(6067, '6070'),
-(6067, '6065'),
-(6067, '6058'),
-(6067, '6055'),
-(6067, '6054'),
-(6067, '6038'),
-(6067, '2'),
-(6064, '6038'),
-(6045, '6067'),
-(2, '6054'),
-(3, '6040'),
-(6036, '6052'),
-(6035, '6036'),
-(6037, '0'),
-(6040, '6063'),
-(6054, '2'),
-(6055, '6067'),
-(6065, '6038'),
-(6041, '6063'),
-(6056, '6067'),
-(6038, '6065'),
-(6039, '6065'),
-(6068, '6059'),
-(6068, '6066'),
-(6068, '6032'),
-(6069, '6062'),
-(6069, '6060'),
-(6069, '6059'),
-(6069, '6056'),
-(6069, '6055'),
-(6069, '6054'),
-(6069, '6040'),
-(6069, '2'),
-(2, '6049'),
-(6050, '6079'),
-(6063, '3'),
-(6061, '6043'),
-(6067, '6053'),
-(6070, '6067'),
-(1, '6070'),
-(6053, '6061'),
-(6053, '6067'),
-(6053, '6088'),
-(6053, '6037'),
-(1, '6072'),
-(6072, '1'),
-(6072, '6060'),
-(6072, '6062'),
-(6073, '6059'),
-(6073, '6065'),
-(6073, '6064'),
-(6059, '6073'),
-(6059, '6068'),
-(6059, '6032'),
-(6073, '6068'),
-(6060, '6062'),
-(6074, '2'),
-(6074, '6054'),
-(2, '6063'),
-(6054, '6063'),
-(6075, '6032'),
-(6075, '6066'),
-(6075, '6071'),
-(6075, '6059'),
-(6075, '6068'),
-(6032, '6059'),
-(6066, '6059'),
-(6032, '6071'),
-(6032, '6075'),
-(6032, '6066'),
-(6076, '6067'),
-(6079, '6063'),
-(6080, '6050'),
-(6050, '6080'),
-(6050, '6069'),
-(6081, '6070'),
-(6081, '6067'),
-(6081, '6071'),
-(6082, '6081'),
-(6082, '6070'),
-(6082, '6067'),
-(6082, '6071'),
-(6083, '0'),
-(6083, '6037'),
-(6083, '6042'),
-(6083, '6063'),
-(6084, '6035'),
-(6084, '6036'),
-(6084, '6081'),
-(6085, '2'),
-(6085, '6054'),
-(6085, '6074'),
-(6085, '6067'),
-(6086, '3'),
-(6086, '6040'),
-(6086, '6067'),
-(6086, '6063'),
-(6087, '6038'),
-(6087, '6039'),
-(6087, '6064'),
-(6088, '6053'),
-(6088, '6037'),
-(6088, '6052'),
-(6088, '6067'),
-(6037, '6061'),
-(6053, '6069'),
-(6089, '6059'),
-(6089, '6069'),
-(6089, '6067'),
-(6059, '6089'),
-(6090, '6069'),
-(6090, '6061'),
-(6090, '6071'),
-(6091, '6082'),
-(6091, '6069'),
-(6091, '6063'),
-(6097, '6098'),
-(6097, '6064'),
-(6097, '6073'),
-(6118, '6079'),
-(6118, '6036'),
-(6118, '6119'),
-(6119, '6118'),
-(6119, '6037'),
-(6119, '6036'),
-(6117, '6116'),
-(6117, '6052'),
-(6117, '6088'),
-(6116, '6117'),
-(6116, '6037'),
-(6116, '6052'),
-(6116, '6088'),
-(6105, '6063'),
-(6105, '6086'),
-(6105, '6055'),
-(6098, '6073'),
-(6121, '6063'),
-(6121, '6091'),
-(6121, '6042'),
-(6121, '6036'),
-(6098, '6097'),
-(6098, '6064'),
-(6098, '6039'),
-(6092, '6051'),
-(6092, '6033'),
-(6093, '6051'),
-(6093, '6092'),
-(6093, '6033'),
-(6094, '6051'),
-(6094, '6067'),
-(6094, '6093'),
-(6094, '6033'),
-(6099, '6100'),
-(6099, '6075'),
-(6099, '6032'),
-(6100, '6075'),
-(6100, '6099'),
-(6100, '6068'),
-(6099, '6059'),
-(6101, '6125'),
-(6101, '6066'),
-(6106, '6063'),
-(6106, '6085'),
-(6106, '6074'),
-(6108, '6074'),
-(6108, '6085'),
-(6123, '6089'),
-(6123, '6063'),
-(6123, '6034'),
-(6109, '6089'),
-(6109, '6074'),
-(6109, '2'),
-(6114, '6077'),
-(6115, '6056'),
-(6115, '6089'),
-(6104, '3'),
-(6104, '6055'),
-(6104, '6063'),
-(6125, '6059'),
-(6125, '6126'),
-(6125, '6075'),
-(6125, '6066'),
-(6126, '6032'),
-(6126, '6125'),
-(6126, '6059'),
-(6126, '6068'),
-(6107, '6057'),
-(6107, '6058'),
-(6111, '6041'),
-(6111, '6107'),
-(6112, '6113'),
-(6112, '6041'),
-(6113, '6041'),
-(6113, '6112'),
-(6124, '6045'),
-(6120, '6122'),
-(6120, '6121'),
-(6120, '6052'),
-(6122, '6035'),
-(6122, '6084'),
-(6122, '6120'),
-(6095, '1'),
-(6095, '6096'),
-(6095, '6060'),
-(6096, '6060'),
-(6096, '6095'),
-(6096, '1'),
-(6101, '6059'),
-(6051, '6092'),
-(6051, '6033');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `product_img`
---
-
-CREATE TABLE IF NOT EXISTS `product_img` (
-  `id_product` bigint(10) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `id` int(255) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  KEY `id_tovar` (`id_product`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
 
 --
 -- Дамп данных таблицы `product_img`
@@ -824,17 +460,6 @@ INSERT INTO `product_img` (`id_product`, `name`, `id`) VALUES
 (6133, 'zadnij_fonar_kalina_1117.jpg', 97);
 
 -- --------------------------------------------------------
-
---
--- Структура таблицы `product_type`
---
-
-CREATE TABLE IF NOT EXISTS `product_type` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE cp1251_bin DEFAULT NULL,
-  `type_url` varchar(50) COLLATE cp1251_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `product_type`
